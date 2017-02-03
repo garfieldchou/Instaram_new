@@ -12,12 +12,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -27,40 +31,24 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-/*
-    ParseObject score = new ParseObject("Score"); // provide a class name
-    score.put("username", "rob"); // key as variable, value as value
-    score.put("score", 86);
-    score.saveInBackground(new SaveCallback() {
+    ParseQuery<ParseObject> query = ParseQuery.getQuery("Score");
+
+    query.findInBackground(new FindCallback<ParseObject>() {
         @Override
-        public void done(ParseException e) {
+        public void done(List<ParseObject> objects, ParseException e) {
 
             if (e == null) {
 
-                Log.i("SaveInBackground", "Successful");
+                Log.i("findInBackground", "Retrieved " + objects.size() + " objects");
 
-            } else {
+                if (objects.size() > 0) {
 
-                Log.i("SaveInBackground", "Failed. Error: " + e.toString());
+                    for(ParseObject object : objects) {
 
-            }
-        }
-    });
-*/
-    ParseQuery<ParseObject> query = new ParseQuery<>("Score");
+                        Log.i("findInBackgroundResult", object.getString("username"));
 
-    query.getInBackground("0cyGnj87nZ", new GetCallback<ParseObject>() {
-        @Override
-        public void done(ParseObject object, ParseException e) {
-
-            if (e == null && object != null) {
-
-                object.put("score", 200);
-                object.saveInBackground();
-
-                Log.i("ObjectValue", object.getString("username"));
-                Log.i("ObjectValue", Integer.toString(object.getInt("score")));
-
+                    }
+                }
             }
         }
     });
