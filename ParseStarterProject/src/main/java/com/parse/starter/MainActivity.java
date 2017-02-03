@@ -55,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (e == null && object != null) {
 
+                object.put("score", 200);
+                object.saveInBackground();
+
                 Log.i("ObjectValue", object.getString("username"));
                 Log.i("ObjectValue", Integer.toString(object.getInt("score")));
 
