@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.LogInCallback;
 import com.parse.Parse;
 import com.parse.ParseAnalytics;
 import com.parse.ParseException;
@@ -33,6 +34,22 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    ParseUser.logInInBackground("robpercival", "asdf", new LogInCallback() {
+        @Override
+        public void done(ParseUser user, ParseException e) {
+
+            if (user != null) {
+
+                Log.i("Login", "Successful");
+
+            } else {
+
+                Log.i("Login", "Failed: " + e.toString());
+                
+            }
+        }
+    });
+/*
     ParseUser user = new ParseUser();
 
     user.setUsername("robpercival");
@@ -53,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     });
-
+*/
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
   }
