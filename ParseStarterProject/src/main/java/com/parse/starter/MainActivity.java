@@ -19,7 +19,9 @@ import com.parse.ParseAnalytics;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import java.util.List;
 
@@ -31,30 +33,27 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    ParseQuery<ParseObject> query = ParseQuery.getQuery("Score");
+    ParseUser user = new ParseUser();
 
-    query.whereEqualTo("username", "tommy");
-    query.setLimit(1);
+    user.setUsername("robpercival");
+    user.setPassword("mypass");
 
-    query.findInBackground(new FindCallback<ParseObject>() {
+    user.signUpInBackground(new SignUpCallback() {
         @Override
-        public void done(List<ParseObject> objects, ParseException e) {
+        public void done(ParseException e) {
 
             if (e == null) {
 
-                Log.i("findInBackground", "Retrieved " + objects.size() + " objects");
+                Log.i("Sign Up", "Successful");
 
-                if (objects.size() > 0) {
+            } else {
 
-                    for(ParseObject object : objects) {
+                Log.i("Sign Up", "Failed");
 
-                        Log.i("findInBackgroundResult", Integer.toString(object.getInt("score")));
-
-                    }
-                }
             }
         }
     });
+
 
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
   }
