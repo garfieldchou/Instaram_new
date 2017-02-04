@@ -34,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    ParseUser.logOut();
+
     if (ParseUser.getCurrentUser() != null) {
 
-        Log.i("currentUser", "Usr logged in " + ParseUser.getCurrentUser().getUsername());
+        Log.i("currentUser", "User logged in " + ParseUser.getCurrentUser().getUsername());
 
     } else {
 
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 /*
-    ParseUser.logInInBackground("robpercival", "asdf", new LogInCallback() {
+    ParseUser.logInInBackground("robpercival", "mypass", new LogInCallback() {
         @Override
         public void done(ParseUser user, ParseException e) {
 
