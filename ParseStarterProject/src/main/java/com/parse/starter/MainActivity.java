@@ -34,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    if (ParseUser.getCurrentUser() != null) {
+
+        Log.i("currentUser", "Usr logged in " + ParseUser.getCurrentUser().getUsername());
+
+    } else {
+
+        Log.i("currentUser", "User not logged in");
+
+    }
+
+/*
     ParseUser.logInInBackground("robpercival", "asdf", new LogInCallback() {
         @Override
         public void done(ParseUser user, ParseException e) {
@@ -45,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
             } else {
 
                 Log.i("Login", "Failed: " + e.toString());
-                
+
             }
         }
     });
-/*
+
     ParseUser user = new ParseUser();
 
     user.setUsername("robpercival");
