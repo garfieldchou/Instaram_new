@@ -59,4 +59,17 @@
         android:id="@+id/signupButton"
         android:onClick="signUp" />
 
+    <TextView
+        android:text="or, Login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/changeSignupModeTextView"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_alignBaseline="@+id/signupButton"
+        android:layout_alignBottom="@+id/signupButton"
+        android:layout_toRightOf="@+id/signupButton"
+        android:layout_toEndOf="@+id/signupButton"
+        android:textColor="@android:color/holo_blue_dark" />
+
 </RelativeLayout>
