@@ -78,27 +78,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     } else {
 
-      ParseUser user = new ParseUser();
+      if (signUpModeActive) {
 
-      user.setUsername(usernameEditText.getText().toString());
+        ParseUser user = new ParseUser();
 
-      user.setPassword(passwordEditText.getText().toString());
+        user.setUsername(usernameEditText.getText().toString());
 
-      user.signUpInBackground(new SignUpCallback() {
-        @Override
-        public void done(ParseException e) {
+        user.setPassword(passwordEditText.getText().toString());
 
-          if (e == null) {
+        user.signUpInBackground(new SignUpCallback() {
+          @Override
+          public void done(ParseException e) {
 
-            Log.i("Signup", "Successful");
+            if (e == null) {
 
-          } else {
+              Log.i("Signup", "Successful");
 
-            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+
+              Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+          }
+        });
+      } else {
+
+        ParseUser.logInInBackground(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new LogInCallback() {
+          @Override
+          public void done(ParseUser user, ParseException e) {
+
+            if (user != null) {
+
+              Log.i("Signup", "Login successful");
+
+            } else {
+
+              Toast.makeText(MainActivity.this, e.getMessage().toString(), Toast.LENGTH_SHORT).show();
+
+            }
 
           }
-        }
-      });
+        });
+
+      }
 
     }
 
