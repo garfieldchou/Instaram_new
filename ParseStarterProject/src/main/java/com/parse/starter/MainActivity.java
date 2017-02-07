@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +37,30 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+  Boolean signUpModeActive = true;
+
+  TextView changeSignupModeTextView;
+
   @Override
   public void onClick(View view) {
 
     if (view.getId() == R.id.changeSignupModeTextView) {
 
-      Log.i("AppInfo", "Change Signup Mode");
+      Button signupButton = (Button) findViewById(R.id.signupButton);
+
+      if (signUpModeActive) {
+
+        signUpModeActive = false;
+        signupButton.setText("Login");
+        changeSignupModeTextView.setText("Or, Signup");
+
+      } else {
+
+        signUpModeActive = true;
+        signupButton.setText("Signup");
+        changeSignupModeTextView.setText("Or, Login");
+
+      }
 
     }
 
@@ -90,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    TextView changeSignupModeTextView = (TextView) findViewById(R.id.changeSignupModeTextView);
+    changeSignupModeTextView = (TextView) findViewById(R.id.changeSignupModeTextView);
 
     changeSignupModeTextView.setOnClickListener(this);
 
