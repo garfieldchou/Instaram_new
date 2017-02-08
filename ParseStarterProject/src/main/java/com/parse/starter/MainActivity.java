@@ -8,13 +8,17 @@
  */
 package com.parse.starter;
 
+import android.hardware.input.InputManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +79,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         changeSignupModeTextView.setText("Or, Login");
 
       }
+
+    } else if (view.getId() == R.id.backgroundRelativeLayout || view.getId() == R.id.logoImageView) {
+
+      InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+      inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
     }
 
@@ -146,6 +155,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     changeSignupModeTextView = (TextView) findViewById(R.id.changeSignupModeTextView);
 
     changeSignupModeTextView.setOnClickListener(this);
+
+    RelativeLayout backgroundRelativeLayout = (RelativeLayout) findViewById(R.id.backgroundRelativeLayout);
+
+    ImageView logoImageView = (ImageView) findViewById(R.id.logoImageView);
+
+    backgroundRelativeLayout.setOnClickListener(this);
+
+    logoImageView.setOnClickListener(this);
 
     passwordEditText = (EditText) findViewById(R.id.passwordEditText);
 
