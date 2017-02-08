@@ -82,6 +82,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     } else if (view.getId() == R.id.backgroundRelativeLayout || view.getId() == R.id.logoImageView) {
 
+      View focusView = (View) getCurrentFocus();
+
+      if (focusView.getId() == R.id.backgroundRelativeLayout) {
+
+        Log.i("focusView is equal to ", "R.id.backgroundRelativeLayout");
+
+      } else if (focusView.getId() == R.id.usernameEditText) {
+
+        Log.i("focusView is equal to ", "R.id.usernameEditText");
+
+      } else if (focusView.getId() == R.id.passwordEditText) {
+
+        Log.i("focusView is equal to ", "R.id.passwordEditText");
+
+      } else {
+
+        Log.i("focusView is equal to ", "unknown");
+
+      }
+
       InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
       inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
