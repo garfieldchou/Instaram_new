@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    ParseUser.logOut();
     ParseAnalytics.trackAppOpenedInBackground(getIntent());
   }
 
