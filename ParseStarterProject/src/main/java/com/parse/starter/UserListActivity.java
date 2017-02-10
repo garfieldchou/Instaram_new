@@ -18,12 +18,17 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +104,36 @@ public class UserListActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
 
                 Log.i("Photo", "Received");
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+
+                byte[] byteArray = stream.toByteArray();
+
+                ParseFile file = new ParseFile("image.png", byteArray);
+
+                ParseObject object = new ParseObject("Image");
+
+                object.put("image", file);
+
+                object.put("username", ParseUser.getCurrentUser().getUsername());
+
+                object.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+
+                        if (e == null) {
+
+                            Toast.makeText(UserListActivity.this, "Image Shared!", Toast.LENGTH_SHORT).show();
+
+                        } else {
+
+                            Toast.makeText(UserListActivity.this, "Image could not be shared - please try again later.", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
 
             } catch (IOException e) {
                 e.printStackTrace();
