@@ -93,6 +93,8 @@ public class UserListActivity extends AppCompatActivity {
 
             ParseUser.logOut();
 
+            this.finish();
+
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
 

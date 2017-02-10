@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Intent intent = new Intent(getApplicationContext(), UserListActivity.class);
     startActivity(intent);
 
+    this.finish();
+
   }
 
   @Override
